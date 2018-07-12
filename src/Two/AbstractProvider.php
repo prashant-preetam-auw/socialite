@@ -223,6 +223,13 @@ abstract class AbstractProvider implements ProviderContract
 
         return $user->setToken($token);
     }
+    
+    public function userFromIdToken($token)
+    {
+        $user = $this->mapUserToObject($this->getUserByIdToken($token));
+
+        return $user->setToken($token);
+    }
 
     /**
      * Determine if the current request / session has a mismatching "state".
