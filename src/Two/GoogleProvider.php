@@ -71,6 +71,22 @@ class GoogleProvider extends AbstractProvider implements ProviderInterface
         return json_decode($response->getBody(), true);
     }
 
+    protected function getUserByIdToken($token)    
+    {
+
+        $response = $this->getHttpClient()->get('https://www.googleapis.com/oauth2/v3/tokeninfo?', [
+            'query' => [
+                'id_token' => $token,
+            ],
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.$token,
+            ],
+        ]);
+
+        return json_decode($response->getBody(), true);
+    }
+    
     /**
      * {@inheritdoc}
      */
